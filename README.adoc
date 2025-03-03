@@ -354,10 +354,13 @@ BUILD SUCCESSFUL in 3s
 
 > Task :ear:libertyDev
 Tests finished.
-To run tests on demand, press the Enter key.
-
 ----
 
+You can find the test result of each module from their build directory:
+
+* `jar/build/reports/tests/test/index.html`
+* `ear/build/reports/tests/test/index.html`
+* `war/build/reports/tests/test/index.html`
 
 When you are done checking out the service, exit dev mode by pressing `CTRL+C` in the command-line session where you ran the Liberty.
 

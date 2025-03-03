@@ -20,6 +20,10 @@ subprojects {
         options.encoding = 'UTF-8'
         options.release.set(11)
     }
+
+    test {
+        useJUnitPlatform()
+    }
     // end::options[]
 
     // tag::repositories[]
@@ -28,4 +32,5 @@ subprojects {
         mavenCentral()
     }
     // end::repositories[]
+
 }

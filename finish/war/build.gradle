@@ -11,10 +11,6 @@ dependencies {
     compileOnly 'org.eclipse.microprofile:microprofile:7.0'
 }
 
-test {
-    useJUnitPlatform()
-}
-
 war {
     archiveFileName = rootProject.name + '-' + getArchiveBaseName().get() + '-' +
                       rootProject.version + '.' + getArchiveExtension().get()
