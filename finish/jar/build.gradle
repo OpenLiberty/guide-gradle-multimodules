@@ -2,10 +2,6 @@ apply plugin: 'java'
 
 description = 'JAR Module'
 
-tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8'
-}
-
 jar {
     archiveFileName = rootProject.name + '-' + getArchiveBaseName().get() + '-' +
                       rootProject.version + '.' + getArchiveExtension().get()
