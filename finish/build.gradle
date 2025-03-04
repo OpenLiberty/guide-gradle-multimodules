@@ -20,11 +20,19 @@ subprojects {
         options.encoding = 'UTF-8'
         options.release.set(11)
     }
+    // end::options[]
 
+    // tag::junit[]
     test {
         useJUnitPlatform()
     }
-    // end::options[]
+
+    dependencies {
+        testImplementation platform('org.junit:junit-bom:5.12.0')
+        testImplementation 'org.junit.jupiter:junit-jupiter'
+        testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    }
+    // end::junit[]
 
     // tag::repositories[]
     repositories {

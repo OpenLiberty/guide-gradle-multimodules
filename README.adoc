@@ -201,7 +201,7 @@ start/build.gradle
 include::finish/build.gradle[]
 ----
 
-Set the [hotspot=allprojects file=1]`basic configuration` for the project. Apply [hotspot=java file=1]`java` plugin and its [hotspot=options file=1]`options` to all sub-projects. The plugins and dependencies will be downloaded from the repositories that are specified in the [hotspot=repositories file=1]`repositories` configuration. Each child module inherits all the configurations.
+Set the [hotspot=allprojects file=1]`basic configuration` for the project. Apply [hotspot=java file=1]`java` plugin, its [hotspot=options file=1]`options`, and [hotspot=junit file=1]`junit` dependencies to all sub-projects. The plugins and dependencies will be downloaded from the repositories that are specified in the [hotspot=repositories file=1]`repositories` configuration. Each child module inherits all the configurations.
 
 
 
