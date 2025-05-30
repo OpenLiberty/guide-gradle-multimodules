@@ -286,7 +286,7 @@ Converter.java
 include::finish/jar/src/main/java/io/openliberty/guides/multimodules/lib/Converter.java[]
 ----
 
-Change the [hotspot=getFeetMethod file=1]`getFeet` method so that it converts from centimeters to feet, and the [hotspot=getInchesMethod file=1]`getInches` method so that it converts from centimeters to inches. Update the `sum`, `diff`, `product`, and `quotient` functions so that they add, subtract, multiply, and divide 2 numbers respectively.
+The [hotspot=getFeetMethod file=1]`getFeet` method is changed to convert the `cm` integer parameter from centimeters to feet, and the [hotspot=getInchesMethod file=1]`getInches` method to convert the `cm` integer parameter from centimeters to inches. The `sum`, `diff`, `product`, and `quotient` methods are updated to add, subtract, multiply, and divide 2 numbers respectively.
 
 ifndef::cloud-hosted[]
 Now check out the application again at the http://localhost:9080/converter/[http://localhost:9080/converter/^] URL.
