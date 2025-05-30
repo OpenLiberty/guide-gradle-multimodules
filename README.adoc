@@ -149,11 +149,13 @@ ear/build.gradle
 include::finish/ear/build.gradle[]
 ----
 
+Let look at what each section does.
+
 The first two lines specify that you want to use the [hotspot=ear file=0]`ear` and [hotspot=liberty file=0]`liberty` plug-ins for Gradle. The [hotspot=earConfig file=0]`ear` section configures the `ear` task with the deployment descriptor that provides the web module file name and the context root as [hotspot=webModule file=0]`/converter`.
 
 If no context path is specified, Gradle automatically uses the WAR file artifact ID as the context root for the application, when the `application.xml` file is being generated. The default artifact ID is `{projectName}-{moduleName}-{version}`, like `guide-gradle-multimodules-war-1.0-SNAPSHOT`.
 
-Configure the [hotspot=libertyConfig file=0]`liberty` task that creates the Liberty server name as [hotspot=sampleLibertyServer file=0]`sampleLibertyServer` and deploys the ear file from the path that is specified by the [hotspot=copyLibsDirectory file=0]`copyLibsDirectory` variable.
+The [hotspot=libertyConfig file=0]`liberty` section configures the `liberty` task that creates the Liberty server name as [hotspot=sampleLibertyServer file=0]`sampleLibertyServer` and deploys the ear file from the path that is specified by the [hotspot=copyLibsDirectory file=0]`copyLibsDirectory` variable.
 
 The [hotspot=war file=0]`war` project is added as a project dependency. The [hotspot=deployDependsOn file=0]`deploy` task depends on the `ear` task and the [hotspot=earDependsOn file=0]`ear` task depends on the `jar` task from the `jar` project and the `war` task from the `war` project.
 
@@ -170,7 +172,7 @@ server.xml
 include::finish/ear/src/main/liberty/config/server.xml[]
 ----
 
-You must configure the `server.xml` configuration file with the [hotspot=EARdefinition file=1]`enterpriseApplication` element to specify the location of your EAR application.
+The `server.xml` configuration file configures with the [hotspot=EARdefinition file=1]`enterpriseApplication` element to specify the location of your EAR application.
 
 // =================================================================================================
 // Aggregating the entire build
@@ -179,8 +181,6 @@ You must configure the `server.xml` configuration file with the [hotspot=EARdefi
 == Aggregating the entire build
 
 Because you have multiple modules, aggregate the Gradle projects to simplify the build process.
-
-The `settings.gradle` is used to specify multiple modules.
 
 [role="code_command hotspot", subs="quotes"]
 ----
@@ -193,7 +193,7 @@ settings.gradle
 include::finish/settings.gradle[]
 ----
 
-Include the [hotspot=includeJar hotspot=jarDir file=0]`jar`, [hotspot=includeWar hotspot=warDir file=0]`war`, and [hotspot=includeEar hotspot=earDir file=0]`ear` projects and their directories.
+The `settings.gradle` file is used to specify multiple modules that includes the [hotspot=includeJar hotspot=jarDir file=0]`jar`, [hotspot=includeWar hotspot=warDir file=0]`war`, and [hotspot=includeEar hotspot=earDir file=0]`ear` projects and their directories.
 
 Create a parent [hotspot file=1]`build.gradle` file under the `start` directory to link all of the child modules together. A template is provided for you.
 
@@ -208,7 +208,7 @@ build.gradle
 include::finish/build.gradle[]
 ----
 
-Set the [hotspot=allprojects file=1]`basic configuration` for the project. Apply the [hotspot=java file=1]`java` plug-in, its [hotspot=options file=1]`options`, and [hotspot=junit file=1]`junit` dependencies to all subprojects. The plug-ins and dependencies will be downloaded from the repositories that are specified in the [hotspot=repositories file=1]`repositories` configuration. Each child module inherits all the configurations.
+The [hotspot=allprojects file=1]`allprojects` task sets the basic configuration for the project. The `subprojects` task applies the [hotspot=java file=1]`java` plug-in with its [hotspot=options file=1]`options` and [hotspot=junit file=1]`junit` dependencies to all subprojects. The plug-ins and dependencies will be downloaded from the repositories that are specified in the [hotspot=repositories file=1]`repositories` configuration. Each child module inherits all the configurations.
 
 
 
