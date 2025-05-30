@@ -8,7 +8,7 @@
 :projectid: gradle-multimodules
 :page-layout: guide-multipane
 :page-duration: 30 minutes
-:page-releasedate: 2025-03-29
+:page-releasedate: 2025-06-09
 :page-description: Learn how to build an application consisting of JAR, WAR, and EAR modules with Gradle
 :page-related-guides: ['gradle-intro']
 :page-seo-title: Building a multi-module enterprise Java application with Gradle and Open Liberty
@@ -30,7 +30,7 @@ You will learn how to build an application with multiple modules with Gradle and
 
 == What you'll learn
 
-A Jakarta Platform, Enterprise Edition (Jakarta EE) application consists of modules that work together as one entity. An enterprise archive (EAR) is a wrapper for a Jakarta EE application, which consists of web archive (WAR) and Java archive (JAR) files. To deploy or distribute the Jakarta EE application into new environments, all the modules and resources must first be packaged into an EAR file.
+A Jakarta EE application consists of modules that work together as one entity. An enterprise archive (EAR) is a wrapper for a Jakarta EE application, which consists of web archive (WAR) and Java archive (JAR) files. To deploy or distribute the Jakarta EE application into new environments, all the modules and resources must first be packaged into an EAR file.
 
 In this guide, you will learn how to:
 
@@ -38,7 +38,7 @@ In this guide, you will learn how to:
 * use Gradle to package the WAR file and the JAR file into an EAR file so that you can run and test the application on Open Liberty, and
 * use the Liberty Gradle plug-in to develop a multi-module application in https://openliberty.io/docs/latest/development-mode.html#_run_multi_module_gradle_projects_in_dev_mode[dev mode^] without having to prebuild the JAR and WAR files. In dev mode, your changes are automatically picked up by the running Liberty instance.
 
-You will build a unit converter application that converts heights from centimeters into feet and inches. The application requests the user to enter a height value in centimeters. Then, the application processes the input by using functions that are found in the JAR file to return the height value in imperial units.
+You will build a unit converter application that converts heights from centimeters into feet and inches. The application prompts the user to enter a height value in centimeters. Then, the application processes the input by using functions that are found in the JAR file to return the height value in imperial units.
 
 
 // =================================================================================================
@@ -149,7 +149,7 @@ ear/build.gradle
 include::finish/ear/build.gradle[]
 ----
 
-Define the [hotspot=ear file=0]`ear` and [hotspot=liberty file=0]`liberty` plug-ins that you want to use. Configure the [hotspot=earConfig file=0]`ear` task with the deployment descriptor that provides the web module file name and the context root as [hotspot=webModule file=0]`/converter`.
+The first two lines specify that you want to use the [hotspot=ear file=0]`ear` and [hotspot=liberty file=0]`liberty` plug-ins for Gradle. The [hotspot=earConfig file=0]`ear` section configures the `ear` task with the deployment descriptor that provides the web module file name and the context root as [hotspot=webModule file=0]`/converter`.
 
 If no context path is specified, Gradle automatically uses the WAR file artifact ID as the context root for the application, when the `application.xml` file is being generated. The default artifact ID is `{projectName}-{moduleName}-{version}`, like `guide-gradle-multimodules-war-1.0-SNAPSHOT`.
 
@@ -261,9 +261,9 @@ HeightsBean.java
 include::finish/war/src/main/java/io/openliberty/guides/multimodules/web/HeightsBean.java[]
 ----
 
-The [hotspot=getFeet file=0]`getFeet(cm)` invocation was added to the [hotspot=setHeightFeet file=0]`setHeightFeet` method to convert a measurement into feet.
+The [hotspot=getFeet file=0]`getFeet(cm)` invocation is added to the [hotspot=setHeightFeet file=0]`setHeightFeet` method to convert a measurement into feet.
 
-The [hotspot=getInches file=0]`getInches(cm)` invocation was added to the [hotspot=setHeightInches file=0]`setHeightInches` method to convert a measurement into inches.
+The [hotspot=getInches file=0]`getInches(cm)` invocation is added to the [hotspot=setHeightInches file=0]`setHeightInches` method to convert a measurement into inches.
 
 ifndef::cloud-hosted[]
 You can check out the running application by going to the http://localhost:9080/converter/[http://localhost:9080/converter/^] URL.
