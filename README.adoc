@@ -8,7 +8,7 @@
 :projectid: gradle-multimodules
 :page-layout: guide-multipane
 :page-duration: 30 minutes
-:page-releasedate: 2025-03-29
+:page-releasedate: 2025-06-09
 :page-description: Learn how to build an application consisting of JAR, WAR, and EAR modules with Gradle
 :page-related-guides: ['gradle-intro']
 :page-seo-title: Building a multi-module enterprise Java application with Gradle and Open Liberty
@@ -30,7 +30,7 @@ You will learn how to build an application with multiple modules with Gradle and
 
 == What you'll learn
 
-A Jakarta Platform, Enterprise Edition (Jakarta EE) application consists of modules that work together as one entity. An enterprise archive (EAR) is a wrapper for a Jakarta EE application, which consists of web archive (WAR) and Java archive (JAR) files. To deploy or distribute the Jakarta EE application into new environments, all the modules and resources must first be packaged into an EAR file.
+A Jakarta EE application consists of modules that work together as one entity. An enterprise archive (EAR) is a wrapper for a Jakarta EE application, which consists of web archive (WAR) and Java archive (JAR) files. To deploy or distribute the Jakarta EE application into new environments, all the modules and resources must first be packaged into an EAR file.
 
 In this guide, you will learn how to:
 
@@ -38,7 +38,7 @@ In this guide, you will learn how to:
 * use Gradle to package the WAR file and the JAR file into an EAR file so that you can run and test the application on Open Liberty, and
 * use the Liberty Gradle plug-in to develop a multi-module application in https://openliberty.io/docs/latest/development-mode.html#_run_multi_module_gradle_projects_in_dev_mode[dev mode^] without having to prebuild the JAR and WAR files. In dev mode, your changes are automatically picked up by the running Liberty instance.
 
-You will build a unit converter application that converts heights from centimeters into feet and inches. The application requests the user to enter a height value in centimeters. Then, the application processes the input by using functions that are found in the JAR file to return the height value in imperial units.
+You will build a unit converter application that converts heights from centimeters into feet and inches. The application prompts the user to enter a height value in centimeters. Then, the application processes the input by using functions that are found in the JAR file to return the height value in imperial units.
 
 
 // =================================================================================================
@@ -149,11 +149,13 @@ ear/build.gradle
 include::finish/ear/build.gradle[]
 ----
 
-Define the [hotspot=ear file=0]`ear` and [hotspot=liberty file=0]`liberty` plug-ins that you want to use. Configure the [hotspot=earConfig file=0]`ear` task with the deployment descriptor that provides the web module file name and the context root as [hotspot=webModule file=0]`/converter`.
+Let look at what each section does.
+
+The first two lines specify that you want to use the [hotspot=ear file=0]`ear` and [hotspot=liberty file=0]`liberty` plug-ins for Gradle. The [hotspot=earConfig file=0]`ear` section configures the `ear` task with the deployment descriptor that provides the web module file name and the context root as [hotspot=webModule file=0]`/converter`.
 
 If no context path is specified, Gradle automatically uses the WAR file artifact ID as the context root for the application, when the `application.xml` file is being generated. The default artifact ID is `{projectName}-{moduleName}-{version}`, like `guide-gradle-multimodules-war-1.0-SNAPSHOT`.
 
-Configure the [hotspot=libertyConfig file=0]`liberty` task that creates the Liberty server name as [hotspot=sampleLibertyServer file=0]`sampleLibertyServer` and deploys the ear file from the path that is specified by the [hotspot=copyLibsDirectory file=0]`copyLibsDirectory` variable.
+The [hotspot=libertyConfig file=0]`liberty` section configures the `liberty` task that creates the Liberty server name as [hotspot=sampleLibertyServer file=0]`sampleLibertyServer` and deploys the ear file from the path that is specified by the [hotspot=copyLibsDirectory file=0]`copyLibsDirectory` variable.
 
 The [hotspot=war file=0]`war` project is added as a project dependency. The [hotspot=deployDependsOn file=0]`deploy` task depends on the `ear` task and the [hotspot=earDependsOn file=0]`ear` task depends on the `jar` task from the `jar` project and the `war` task from the `war` project.
 
@@ -170,7 +172,7 @@ server.xml
 include::finish/ear/src/main/liberty/config/server.xml[]
 ----
 
-You must configure the `server.xml` configuration file with the [hotspot=EARdefinition file=1]`enterpriseApplication` element to specify the location of your EAR application.
+The `server.xml` configuration file configures with the [hotspot=EARdefinition file=1]`enterpriseApplication` element to specify the location of your EAR application.
 
 // =================================================================================================
 // Aggregating the entire build
@@ -179,8 +181,6 @@ You must configure the `server.xml` configuration file with the [hotspot=EARdefi
 == Aggregating the entire build
 
 Because you have multiple modules, aggregate the Gradle projects to simplify the build process.
-
-The `settings.gradle` is used to specify multiple modules.
 
 [role="code_command hotspot", subs="quotes"]
 ----
@@ -193,7 +193,7 @@ settings.gradle
 include::finish/settings.gradle[]
 ----
 
-Include the [hotspot=includeJar hotspot=jarDir file=0]`jar`, [hotspot=includeWar hotspot=warDir file=0]`war`, and [hotspot=includeEar hotspot=earDir file=0]`ear` projects and their directories.
+The `settings.gradle` file is used to specify multiple modules that includes the [hotspot=includeJar hotspot=jarDir file=0]`jar`, [hotspot=includeWar hotspot=warDir file=0]`war`, and [hotspot=includeEar hotspot=earDir file=0]`ear` projects and their directories.
 
 Create a parent [hotspot file=1]`build.gradle` file under the `start` directory to link all of the child modules together. A template is provided for you.
 
@@ -208,7 +208,7 @@ build.gradle
 include::finish/build.gradle[]
 ----
 
-Set the [hotspot=allprojects file=1]`basic configuration` for the project. Apply the [hotspot=java file=1]`java` plug-in, its [hotspot=options file=1]`options`, and [hotspot=junit file=1]`junit` dependencies to all subprojects. The plug-ins and dependencies will be downloaded from the repositories that are specified in the [hotspot=repositories file=1]`repositories` configuration. Each child module inherits all the configurations.
+The [hotspot=allprojects file=1]`allprojects` task sets the basic configuration for the project. The `subprojects` task applies the [hotspot=java file=1]`java` plug-in with its [hotspot=options file=1]`options` and [hotspot=junit file=1]`junit` dependencies to all subprojects. The plug-ins and dependencies will be downloaded from the repositories that are specified in the [hotspot=repositories file=1]`repositories` configuration. Each child module inherits all the configurations.
 
 
 
@@ -261,9 +261,9 @@ HeightsBean.java
 include::finish/war/src/main/java/io/openliberty/guides/multimodules/web/HeightsBean.java[]
 ----
 
-The [hotspot=getFeet file=0]`getFeet(cm)` invocation was added to the [hotspot=setHeightFeet file=0]`setHeightFeet` method to convert a measurement into feet.
+The [hotspot=getFeet file=0]`getFeet(cm)` invocation is added to the [hotspot=setHeightFeet file=0]`setHeightFeet` method to convert a measurement into feet.
 
-The [hotspot=getInches file=0]`getInches(cm)` invocation was added to the [hotspot=setHeightInches file=0]`setHeightInches` method to convert a measurement into inches.
+The [hotspot=getInches file=0]`getInches(cm)` invocation is added to the [hotspot=setHeightInches file=0]`setHeightInches` method to convert a measurement into inches.
 
 ifndef::cloud-hosted[]
 You can check out the running application by going to the http://localhost:9080/converter/[http://localhost:9080/converter/^] URL.
@@ -286,7 +286,7 @@ Converter.java
 include::finish/jar/src/main/java/io/openliberty/guides/multimodules/lib/Converter.java[]
 ----
 
-Change the [hotspot=getFeetMethod file=1]`getFeet` method so that it converts from centimeters to feet, and the [hotspot=getInchesMethod file=1]`getInches` method so that it converts from centimeters to inches. Update the `sum`, `diff`, `product`, and `quotient` functions so that they add, subtract, multiply, and divide 2 numbers respectively.
+The [hotspot=getFeetMethod file=1]`getFeet` method is changed to convert the `cm` integer parameter from centimeters to feet, and the [hotspot=getInchesMethod file=1]`getInches` method to convert the `cm` integer parameter from centimeters to inches. The `sum`, `diff`, `product`, and `quotient` methods are updated to add, subtract, multiply, and divide 2 numbers respectively.
 
 ifndef::cloud-hosted[]
 Now check out the application again at the http://localhost:9080/converter/[http://localhost:9080/converter/^] URL.
