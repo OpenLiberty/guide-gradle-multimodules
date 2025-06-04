@@ -149,7 +149,7 @@ ear/build.gradle
 include::finish/ear/build.gradle[]
 ----
 
-Let look at what each section does.
+Let's look at what each section does.
 
 The first two lines specify that you want to use the [hotspot=ear file=0]`ear` and [hotspot=liberty file=0]`liberty` plug-ins for Gradle. The [hotspot=earConfig file=0]`ear` section configures the `ear` task with the deployment descriptor that provides the web module file name and the context root as [hotspot=webModule file=0]`/converter`.
 
