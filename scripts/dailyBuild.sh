@@ -7,7 +7,7 @@ while getopts t:d: flag; do
     esac
 done
 
-sed -i "\#liberty {#a \ninstall { runtimeUrl=\"https://public.dhe.ibm.com/ibmdl/export/pub/software/openliberty/runtime/nightly/$DATE/$DRIVER\"}" ear/build.gradle
+sed -i "\#liberty {#a    install { runtimeUrl=\"https://public.dhe.ibm.com/ibmdl/export/pub/software/openliberty/runtime/nightly/$DATE/$DRIVER\"}" ear/build.gradle
 cat ear/build.gradle
 
 ../scripts/testApp.sh
