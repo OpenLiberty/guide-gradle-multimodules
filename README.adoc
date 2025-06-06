@@ -8,7 +8,7 @@
 :projectid: gradle-multimodules
 :page-layout: guide-multipane
 :page-duration: 30 minutes
-:page-releasedate: 2025-06-09
+:page-releasedate: 2025-06-06
 :page-description: Learn how to build an application consisting of JAR, WAR, and EAR modules with Gradle
 :page-related-guides: ['gradle-intro']
 :page-seo-title: Building a multi-module enterprise Java application with Gradle and Open Liberty
