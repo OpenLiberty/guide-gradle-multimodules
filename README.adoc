@@ -271,7 +271,8 @@ You can check out the running application by going to the http://localhost:9080/
 endif::[]
 ifdef::cloud-hosted[]
 Click the following button to check out the running application by visiting the ***/converter*** endpoint:
-::startApplication{port="9080" display="external" name="Visit application" route="/converter"}
+
+::startApplication{port="9080" display="external" name="Check out the application" route="/converter"}
 endif::[]
 
 Note that the application currently returns 0 for height conversions because the logic in the converter hasn't been implemented yet. You'll fix this by updating the converter in the following step.
@@ -294,6 +295,7 @@ Now check out the application again at the http://localhost:9080/converter/[http
 endif::[]
 ifdef::cloud-hosted[]
 Now check out the application again at the ***/converter*** endpoint:
+
 ::startApplication{port="9080" display="external" name="Check out the application" route="/converter"}
 endif::[]
 
