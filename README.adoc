@@ -36,7 +36,12 @@ In this guide, you will learn how to:
 
 * establish a dependency between a web module and a Java library module,
 * use Gradle to package the WAR file and the JAR file into an EAR file so that you can run and test the application on Open Liberty, and
+ifndef::cloud-hosted[]
 * use the Liberty Gradle plug-in to develop a multi-module application in https://openliberty.io/docs/latest/development-mode.html#_run_multi_module_gradle_projects_in_dev_mode[dev mode^] without having to prebuild the JAR and WAR files. In dev mode, your changes are automatically picked up by the running Liberty instance.
+endif::[]
+ifdef::cloud-hosted[]
+* use the Liberty Gradle plug-in to develop a multi-module application in [dev mode](https://openliberty.io/docs/latest/development-mode.html#_run_multi_module_gradle_projects_in_dev_mode) without having to prebuild the JAR and WAR files. In dev mode, your changes are automatically picked up by the running Liberty instance.
+endif::[]
 
 You will build a unit converter application that converts heights from centimeters into feet and inches. The application prompts the user to enter a height value in centimeters. Then, the application processes the input by using functions that are found in the JAR file to return the height value in imperial units.
 
