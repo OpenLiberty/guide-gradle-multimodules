@@ -3,7 +3,7 @@ apply plugin: 'war'
 description = 'WAR Module'
 
 dependencies {
-    compileOnly 'jakarta.platform:jakarta.jakartaee-api:10.0.0'
+    compileOnly 'jakarta.platform:jakarta.jakartaee-api:11.0.0'
     compileOnly 'org.eclipse.microprofile:microprofile:7.0'
 }
 
