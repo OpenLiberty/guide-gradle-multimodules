@@ -7,7 +7,7 @@ dependencies {
     implementation project(':jar')
     // end::projectJar[]
     compileOnly 'jakarta.platform:jakarta.jakartaee-api:10.0.0'
-    compileOnly 'org.eclipse.microprofile:microprofile:7.0'
+    compileOnly 'org.eclipse.microprofile:microprofile:7.1'
 }
 
 war {
