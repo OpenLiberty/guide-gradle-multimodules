@@ -1,4 +1,4 @@
-FROM icr.io/appcafe/open-liberty:full-java11-openj9-ubi
+FROM icr.io/appcafe/open-liberty:full-java17-openj9-ubi
 
 # Copy server config from source tree.
 # NOTE: In container dev mode libertyCreate() only creates the directory
