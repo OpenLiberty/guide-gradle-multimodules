@@ -2,6 +2,14 @@ apply plugin: 'war'
 
 description = 'WAR Module'
 
+configurations {
+    warOnly
+}
+
+artifacts {
+    warOnly war
+}
+
 dependencies {
     // tag::projectJar[]
     implementation project(':jar')

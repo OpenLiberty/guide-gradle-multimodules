@@ -17,14 +17,14 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'io.openliberty.tools:liberty-gradle-plugin:3.9.5'
+        classpath 'io.openliberty.tools:liberty-gradle-plugin:4.0.2'
     }
 }
 
 
 dependencies {
     // tag::war[]
-    deploy project(path:':war', configuration:'archives')
+    deploy project(path:':war', configuration:'warOnly')
     // end::war[]
 }
 
@@ -59,12 +59,17 @@ liberty {
         verifyAppStartTimeout = 30
         looseApplication = true
     }
+    dev {
+        containerfile = file('Containerfile')
+    }
 }
 // end::libertyConfig[]
 
 // tag::test[]
 test {
-    systemProperty 'http.port', liberty.server.var.'http.port'
+    // In container dev mode, dev mode passes the mapped host port via -Dliberty.http.port.
+    // Fall back to the static server variable when not running under dev mode.
+    systemProperty 'http.port', System.getProperty('liberty.http.port', liberty.server.var.'http.port')
     enabled = gradle.startParameter.taskNames.contains('test')
 }
 // end::test[]
