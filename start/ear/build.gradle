@@ -1,3 +1,6 @@
+apply plugin: 'ear'
+apply plugin: 'liberty'
+
 description = 'EAR Module'
 
 buildscript {
@@ -10,6 +13,44 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'io.openliberty.tools:liberty-gradle-plugin:4.0.2'
+        classpath 'io.openliberty.tools:liberty-gradle-plugin:4.0.3'
     }
 }
+
+
+dependencies {
+    deploy project(path:':war', configuration:'warOnly')
+}
+
+ear {
+    archiveFileName = rootProject.name + '-' + getArchiveBaseName().get() + '-' +
+                      rootProject.version + '.' + getArchiveExtension().get()
+    deploymentDescriptor {
+        webModule ('guide-gradle-multimodules-war-1.0-SNAPSHOT.war', '/converter')
+    }
+}
+
+liberty {
+    server {
+        name = 'sampleLibertyServer'
+        deploy {
+            apps = [ear]
+            copyLibsDirectory = file("${project.getLayout().getBuildDirectory().getAsFile().get()}/libs")
+        }
+        var.'http.port' = '9080'
+        var.'https.port' = '9443'
+        verifyAppStartTimeout = 30
+        looseApplication = true
+    }
+    dev {
+        containerfile = file('Containerfile')
+    }
+}
+
+test {
+    systemProperty 'http.port', System.getProperty('liberty.http.port', liberty.server.var.'http.port')
+    enabled = gradle.startParameter.taskNames.contains('test')
+}
+
+deploy.dependsOn 'ear'
+ear.dependsOn ':jar:jar', ':war:war'

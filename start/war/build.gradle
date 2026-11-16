@@ -2,8 +2,17 @@ apply plugin: 'war'
 
 description = 'WAR Module'
 
+configurations {
+    warOnly
+}
+
+artifacts {
+    warOnly war
+}
+
 dependencies {
-    compileOnly 'jakarta.platform:jakarta.jakartaee-api:10.0.0'
+    implementation project(':jar')
+    compileOnly 'jakarta.platform:jakarta.jakartaee-api:11.0.0'
     compileOnly 'org.eclipse.microprofile:microprofile:7.1'
 }
 
@@ -11,3 +20,5 @@ war {
     archiveFileName = rootProject.name + '-' + getArchiveBaseName().get() + '-' +
                       rootProject.version + '.' + getArchiveExtension().get()
 }
+
+war.dependsOn ':jar:jar'
